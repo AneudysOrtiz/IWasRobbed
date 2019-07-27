@@ -1,0 +1,44 @@
+<div class="wrapper">
+  <div class="main">
+    <div class="section section-light-blue section-nucleo-icons">
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <h2>Reporte de robo</h2>
+        <hr class="featurette-divider">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form">
+              <div class="form-group">
+                <label for="formGroupExampleInput">Titulo</label>
+                <input type="text" [(ngModel)]="model.title" class="form-control" id="formGroupExampleInput"
+                  placeholder="Titutlo del reporte">
+              </div>
+              <div class="form-group">
+                <label>Fecha</label>
+                <input [(ngModel)]="model.date" type="date" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea [(ngModel)]="model.description" class="form-control" placeholder="Descripcion"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Imagen</label>
+                <input type="file" (change)="changeListener($event)" accept=".png,.jpg,.jpeg,.gif" class="form-control">
+              </div>
+              <button type="button" (click)="save()" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <agm-map [latitude]="initialLat" (mapClick)="mapClick($event)" [longitude]="initialLng" [zoom]="11">
+              <agm-marker *ngIf="model.latitude" [latitude]="model.latitude" [longitude]="model.longitude">
+              </agm-marker>
+            </agm-map>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

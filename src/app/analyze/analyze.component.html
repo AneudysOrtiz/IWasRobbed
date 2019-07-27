@@ -1,0 +1,105 @@
+<div class="wrapper">
+  <div class="main">
+    <div class="section section-light-blue section-nucleo-icons">
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2 class="title" style="margin-top:0px !important">Análisis de imagen</h2>
+            <canvas #myCanvas></canvas>
+            <div class="row" style="margin-top:15px">
+              <div class="col">
+                <select [(ngModel)]="tipoAnalisis" class="form-control">
+                  <option value="0">Tipo de análisis</option>
+                  <option value="1">Facial</option>
+                  <option value="3">Logos</option>
+                  <option value="2">Etiquetas</option>
+                  <option value="4">Objetos</option>
+                </select>
+              </div>
+              <div class="col">
+                <button (click)="process()" class="btn btn-success">Procesar</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <ng-container *ngIf="!isFaceMode">
+              <div class="card">
+                <div class="card-header">
+                  Resultados
+                </div>
+                <div class="card-body">
+                  <div *ngFor="let item of data" class="container">
+                    <h4>{{item.label}}</h4>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" [style.width.%]="item.value" aria-valuemin="0"
+                        aria-valuemax="100">{{item.value}}%</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <div class="container" *ngIf="isFaceMode">
+              <div class="card">
+                <div class="card-header">
+                  Resultados
+                </div>
+                <div class="card-body">
+                  <div class="container">
+                    <h4>Alegría</h4>
+                    <div class="progress" style="height: 20px;">
+                      <div class=" progress-bar" [ngClass]="equivalentColor(faceData.joyLikelihood)" role="progressbar"
+                        [style.width.%]="equivalent(faceData.joyLikelihood)" aria-valuemin="0" aria-valuemax="100">
+                        {{equivalentLabel(faceData.joyLikelihood)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <h4>Dolor</h4>
+                    <div class="progress" style="height: 20px;">
+                      <div class="progress-bar" [ngClass]="equivalentColor(faceData.sorrowLikelihood)"
+                        role="progressbar" [style.width.%]="equivalent(faceData.sorrowLikelihood)" aria-valuemin="0"
+                        aria-valuemax="100">
+                        {{equivalentLabel(faceData.sorrowLikelihood)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <h4>Enfado</h4>
+                    <div class="progress" style="height: 20px;">
+                      <div class="progress-bar" [ngClass]="equivalentColor(faceData.angerLikelihood)" role="progressbar"
+                        [style.width.%]="equivalent(faceData.angerLikelihood)" aria-valuemin="0" aria-valuemax="100">
+                        {{equivalentLabel(faceData.angerLikelihood)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <h4>Sorpresa</h4>
+                    <div class="progress" style="height: 20px;">
+                      <div class="progress-bar" [ngClass]="equivalentColor(faceData.surpriseLikelihood)"
+                        role="progressbar" [style.width.%]="equivalent(faceData.surpriseLikelihood)" aria-valuemin="0"
+                        aria-valuemax="100">
+                        {{equivalentLabel(faceData.surpriseLikelihood)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <h4>Confianza</h4>
+                    <div class="progress" style="height: 20px;">
+                      <div class="progress-bar bg-success" role="progressbar"
+                        [style.width.%]="faceData.detectionConfidence*100" aria-valuemin="0" aria-valuemax="100">
+                        {{faceData.detectionConfidence*100}}%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

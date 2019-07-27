@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <div class="main">
+        <div class="section section-light-blue section-nucleo-icons">
+            <div class="text-center">
+                <h1 class="display-4">I Was Robbed</h1>
+                <p class="lead">Una plataforma para informe de robos</p>
+                <p class="lead">Puedes reportar un incidente</p>
+                <a class="btn btn-dark btn-lg" *ngIf="isLogged()" [routerLink]="['/newpost']" role="button">Reportar</a>
+                <a class="btn btn-dark btn-lg" *ngIf="!isLogged()" [routerLink]="['/signup']" role="button">Reportar</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h2 class="title">Últimos Reportes</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 download-area ml-auto mr-auto" *ngFor="let item of data">
+                        <div class="card" style="width: 22rem;">
+                            <img height="300" style="object-fit:cover" *ngIf="item.file" [src]="apiUrl + item.file"
+                                class="card-img-top" alt="...">
+                            <img height="300" width="640" *ngIf="!item.file" src="https://picsum.photos/640/520"
+                                class="card-img-top" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.title}}</h5>
+                                <p class="card-text">{{item.description}}</p>
+                                <a [routerLink]="['/detail', item.postId]" class="btn btn-primary">Ver detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

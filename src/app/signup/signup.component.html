@@ -1,0 +1,108 @@
+<div class="wrapper">
+    <div class="page-header" style="background-image: url('./assets/img/login-image.jpg');">
+        <div class="filter"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
+                    <div class="card card-register">
+                        <h3 class="title">Bienvenido</h3>
+
+                        <div class="register-form">
+                            <ng-container *ngIf="newUser">
+                                <label>Nombre</label>
+                                <div class="input-group form-group-no-border"
+                                    [ngClass]="{'input-group-focus':focus===true}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-user"></i>
+                                        </span>
+                                    </div>
+
+                                    <input type="text" class="form-control" placeholder="Nombre" (focus)="focus=true"
+                                        (blur)="focus=false">
+                                </div>
+
+                                <label>Apellido</label>
+                                <div class="input-group form-group-no-border"
+                                    [ngClass]="{'input-group-focus':focus===true}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-user"></i>
+                                        </span>
+                                    </div>
+
+                                    <input type="text" class="form-control" placeholder="Apellido" (focus)="focus=true"
+                                        (blur)="focus=false">
+                                </div>
+
+                                <label>Telefono</label>
+                                <div class="input-group form-group-no-border"
+                                    [ngClass]="{'input-group-focus':focus===true}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-phone"></i>
+                                        </span>
+                                    </div>
+
+                                    <input type="text" class="form-control" placeholder="Telefono" (focus)="focus=true"
+                                        (blur)="focus=false">
+                                </div>
+                            </ng-container>
+                            <label>Email</label>
+                            <div class="input-group form-group-no-border"
+                                [ngClass]="{'input-group-focus':focus===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                </div>
+
+                                <input type="text" [(ngModel)]="model.email" class="form-control" placeholder="Email"
+                                    (focus)="focus=true" (blur)="focus=false">
+                            </div>
+
+                            <label>Clave</label>
+                            <div class="input-group form-group-no-border"
+                                [ngClass]="{'input-group-focus':focus1===true}">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                </div>
+                                <input type="password" [(ngModel)]="model.password" class="form-control"
+                                    placeholder="Password" (focus)="focus1=true" (blur)="focus1=false">
+                            </div>
+
+                            <ng-container *ngIf="newUser">
+
+                                <label>Confirmar Clave</label>
+                                <div class="input-group form-group-no-border"
+                                    [ngClass]="{'input-group-focus':focus1===true}">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-key"></i>
+                                        </span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="Password"
+                                        (focus)="focus1=true" (blur)="focus1=false">
+                                </div>
+                            </ng-container>
+
+                            <button *ngIf="!newUser" [disabled]="!model.email || !model.password" (click)="login()"
+                                class="btn btn-dark btn-block btn-round">Iniciar sesión</button>
+                            <button *ngIf="newUser" (click)="register()"
+                                class="btn btn-dark btn-block btn-round">Registrarse</button>
+                        </div>
+                        <div class="forgot">
+                            <p [hidden]="!message">{{message}}</p>
+                            <button *ngIf="!newUser" (click)="newUser=true"
+                                class="btn btn-link btn-dark">Regístrate</button>
+                            <button *ngIf="newUser" (click)="newUser=false" class="btn btn-link btn-dark">Iniciar
+                                Sesión</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
